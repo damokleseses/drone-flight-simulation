@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MapCamera2DController : MonoBehaviour 
+public class MapCamera2DController : MonoBehaviour
 {
     public Camera cam;
-    public float panSpeed = 1.0f;
-    public float zoomSpeed = 0.15f;
+    public float panSpeed = 1.0f;          // multiplier
+    public float zoomSpeed = 0.15f;        // orthographic zoom factor
     public float minOrthoSize = 10f;
     public float maxOrthoSize = 500000f;
 
@@ -16,12 +16,12 @@ public class MapCamera2DController : MonoBehaviour
     private Vector2 _lastMouse;
     private bool _panning;
 
-    private void Reset()
+    void Reset()
     {
         cam = GetComponent<Camera>();
     }
 
-    private void Update()
+    void Update()
     {
         if (cam == null) return;
         var mouse = Mouse.current;
@@ -35,7 +35,7 @@ public class MapCamera2DController : MonoBehaviour
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize * factor, minOrthoSize, maxOrthoSize);
         }
 
-        // Pan with mous drag
+        // Pan with mouse drag
         bool panPressed = !requirePanButton || IsButtonPressed(mouse, panMouseButton);
 
         if (panPressed && !_panning)
@@ -54,10 +54,12 @@ public class MapCamera2DController : MonoBehaviour
             Vector2 delta = cur - _lastMouse;
             _lastMouse = cur;
 
+            // Move camera in its local X/Z plane (top-down: X right, Z forward)
+            // Scale pan based on ortho size so it feels consistent
             float scale = cam.orthographicSize * 0.002f * panSpeed;
             if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed) scale *= 3f;
 
-            Vector3 move = new Vector3(-delta.x *scale, 0f, -delta.y * scale);
+            Vector3 move = new Vector3(-delta.x * scale, 0f, -delta.y * scale);
             cam.transform.position += move;
         }
     }

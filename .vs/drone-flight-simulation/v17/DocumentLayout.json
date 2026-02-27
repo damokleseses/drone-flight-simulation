@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "D:\\Silas\\Drone\\drone-flight-simulation\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|d:\\silas\\drone\\drone-flight-simulation\\assets\\scripts\\polygondrawtool3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\polygondrawtool3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|d:\\silas\\drone\\drone-flight-simulation\\assets\\scripts\\mapcamera2dcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mapcamera2dcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|d:\\silas\\drone\\drone-flight-simulation\\assets\\scripts\\viewmodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|D:\\Silas\\Drone\\drone-flight-simulation\\assets\\scripts\\viewmodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5DCBC4B-7C78-7947-AFDA-1CDF7B993216}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\viewmodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -23,28 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PolygonDrawTool3D.cs",
+              "DocumentMoniker": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\PolygonDrawTool3D.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PolygonDrawTool3D.cs",
+              "ToolTip": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\PolygonDrawTool3D.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PolygonDrawTool3D.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T10:29:30.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MapCamera2DController.cs",
               "DocumentMoniker": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\MapCamera2DController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MapCamera2DController.cs",
               "ToolTip": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\MapCamera2DController.cs",
               "RelativeToolTip": "Assets\\Scripts\\MapCamera2DController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-26T15:32:37.102Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ViewModeController.cs",
               "DocumentMoniker": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\ViewModeController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ViewModeController.cs",
               "ToolTip": "D:\\Silas\\Drone\\drone-flight-simulation\\Assets\\Scripts\\ViewModeController.cs",
               "RelativeToolTip": "Assets\\Scripts\\ViewModeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAgwFEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T13:50:05.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-26T13:50:05.631Z"
             }
           ]
         }

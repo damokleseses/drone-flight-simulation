@@ -448,37 +448,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 667541664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &100713426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 100713427}
-  m_Layer: 0
-  m_Name: MapCamera2DController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &100713427
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100713426}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1202564962}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103334283
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +596,7 @@ GameObject:
   - component: {fileID: 193851005}
   - component: {fileID: 193851004}
   m_Layer: 0
-  m_Name: ViewModeController
+  m_Name: Service_view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,11 +616,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ViewModeController
   cam3D: {fileID: 1143730502}
   cam2D: {fileID: 1213775370}
-  georeference: {fileID: 562210007}
   focusAnchor: {fileID: 0}
   topDownHeightMeters: 2000
   orthoSize: 2000
-  drawTool: {fileID: 0}
+  enableIn3D:
+  - {fileID: 1143730500}
+  enableIn2D:
+  - {fileID: 1213775368}
+  drawTool: {fileID: 1408002276}
 --- !u!4 &193851005
 Transform:
   m_ObjectHideFlags: 0
@@ -2951,7 +2923,6 @@ Transform:
   - {fileID: 14797919}
   - {fileID: 2007743346}
   - {fileID: 193851005}
-  - {fileID: 100713427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1213775367
@@ -2966,6 +2937,7 @@ GameObject:
   - component: {fileID: 1213775370}
   - component: {fileID: 1213775369}
   - component: {fileID: 1213775368}
+  - component: {fileID: 1213775372}
   m_Layer: 0
   m_Name: MapCamera2D
   m_TagString: Untagged
@@ -3091,6 +3063,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1213775372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213775367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fc3d74327c90b42bf63cd43dec4ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapCamera2DController
+  cam: {fileID: 1213775370}
+  panSpeed: 1
+  zoomSpeed: 0.15
+  minOrthoSize: 10
+  maxOrthoSize: 500000
+  panMouseButton: 1
+  requirePanButton: 1
 --- !u!1 &1278949136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,14 +3193,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1faf77b690978374087d17f9c4555f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolygonDrawTool3D
-  mainCam: {fileID: 1143730502}
-  georeference: {fileID: 562210007}
   missionStore: {fileID: 1885894645}
+  georeference: {fileID: 562210007}
+  viewMode: {fileID: 193851004}
   pickMask:
     serializedVersion: 2
     m_Bits: 4294967295
   maxRayDistance: 2000000
   blockWhenPointerOverUI: 1
+  maxClickMovePixels: 6
 --- !u!1 &1885894644
 GameObject:
   m_ObjectHideFlags: 0

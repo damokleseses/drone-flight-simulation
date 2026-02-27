@@ -1,51 +1,75 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Mathematics;
+using UnityEngine.EventSystems;
 using CesiumForUnity;
 
 public class PolygonDrawTool3D : MonoBehaviour
 {
-    public Camera mainCam;
-    public CesiumGeoreference georeference;
+    [Header("Refs")]
     public MissionStore missionStore;
+    public CesiumGeoreference georeference;
+    public ViewModeController viewMode;
 
+    [Header("Picking")]
     public LayerMask pickMask = ~0;
     public float maxRayDistance = 2_000_000f;
-
     public bool blockWhenPointerOverUI = true;
+
+    [Header("Click vs Drag")]
+    public float maxClickMovePixels = 6f;
+
+    private Vector2 _pressPos;
+    private bool _pressed;
 
     void Reset()
     {
-        mainCam = Camera.main;
-        georeference = FindFirstObjectByType<CesiumGeoreference>();
         missionStore = FindFirstObjectByType<MissionStore>();
+        georeference = FindFirstObjectByType<CesiumGeoreference>();
+        viewMode = FindFirstObjectByType<ViewModeController>();
     }
 
     void Update()
     {
+        if (missionStore == null || georeference == null || viewMode == null) return;
+
+        // Draw only in 2D map mode
+        if (viewMode.CurrentMode != ViewModeController.Mode.Map2D) return;
+
         var mouse = Mouse.current;
         if (mouse == null) return;
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
-            if (blockWhenPointerOverUI && UnityEngine.EventSystems.EventSystem.current != null &&
-                UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            if (blockWhenPointerOverUI && EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            TryAddVertex(mouse.position.ReadValue());
+            _pressed = true;
+            _pressPos = mouse.position.ReadValue();
         }
-    }
 
-    void TryAddVertex(Vector2 screenPos)
-    {
-        if (mainCam == null || georeference == null || missionStore == null) return;
+        if (_pressed && mouse.leftButton.wasReleasedThisFrame)
+        {
+            _pressed = false;
 
-        Ray ray = mainCam.ScreenPointToRay(screenPos);
-        if (!Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, pickMask, QueryTriggerInteraction.Ignore))
-            return;
+            Vector2 releasePos = mouse.position.ReadValue();
+            if (Vector2.Distance(_pressPos, releasePos) > maxClickMovePixels)
+                return; // drag -> don't place a point
 
-        var llh = GeoUtilsCesium.UnityToLonLatHeight(georeference, hit.point);
-        missionStore.AddVertex(llh.x, llh.y, llh.z);
+            // Use active camera (2D)
+            Camera cam = viewMode.cam2D != null ? viewMode.cam2D : Camera.main;
+            if (cam == null) return;
 
-        Debug.Log($"Vertex: lon={llh.x:F6}, lat={llh.y:F6}, h={llh.z:F1}");
+            Ray ray = cam.ScreenPointToRay(releasePos);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, pickMask, QueryTriggerInteraction.Ignore))
+            {
+                // Convert hit point -> lon/lat/height via Cesium
+                double3 llh = GeoUtilsCesium.UnityToLonLatHeight(georeference, hit.point);
+                missionStore.AddVertex(llh.x, llh.y, llh.z);
+
+                Debug.Log($"Vertex added: lon={llh.x:F6}, lat={llh.y:F6}, h={llh.z:F1}");
+            }
+        }
     }
 }
